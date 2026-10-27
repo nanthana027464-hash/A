@@ -1,0 +1,60 @@
+local Rayfield = loadstring(game:HttpGet(
+    "https://sirius.menu/rayfield"
+))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "Alliance Tower Defense",
+    LoadingTitle = "Character Manager",
+    LoadingSubtitle = "Rayfield UI",
+    ConfigurationSaving = {
+        Enabled = false
+    }
+})
+
+local Tab = Window:CreateTab("Character", 4483362458)
+
+local selectedCharacter = "Upgraded Titan Jack'o Man"
+local amount = 1
+
+Tab:CreateDropdown({
+    Name = "เลือกตัวละคร",
+    Options = {
+        "Upgraded Titan Jack'o Man",
+        "Upgraded Titan Cinema Man"
+    },
+    CurrentOption = {"Upgraded Titan Jack'o Man"},
+    MultipleOptions = false,
+    Callback = function(option)
+        selectedCharacter = typeof(option) == "table"
+            and option[1] or option
+    end
+})
+
+Tab:CreateSlider({
+    Name = "จำนวนตัวละคร",
+    Range = {1, 10},
+    Increment = 1,
+    CurrentValue = 1,
+    Callback = function(value)
+        amount = value
+    end
+})
+
+Tab:CreateButton({
+    Name = "สร้างตัวละคร",
+    Callback = function()
+        Rayfield:Notify({
+            Title = "Character Manager",
+            Content = "เลือก " .. selectedCharacter
+                .. " จำนวน " .. amount
+                .. " ตัวแล้ว แต่ยังไม่ได้เชื่อมต่อระบบสร้างจริง",
+            Duration = 5
+        })
+    end
+})
+
+Rayfield:Notify({
+    Title = "พร้อมใช้งาน",
+    Content = "Rayfield UI โหลดเสร็จแล้ว",
+    Duration = 4
+})
